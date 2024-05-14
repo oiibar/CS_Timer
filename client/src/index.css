@@ -7,7 +7,7 @@
     @apply text-sm;
   }
   td {
-    @apply capitalize text-white/70;
+    @apply capitalize;
   }
   thead td {
     @apply text-white;
