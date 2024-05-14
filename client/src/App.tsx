@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router/router";
+import { useAppDispatch } from "./store/hooks";
+import { getToken } from "./helpers/localstorage.helper";
+import { AuthService } from "./services/auth.service";
+import { login, logout } from "./store/user/userSlice";
+import { useEffect } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const dispatch = useAppDispatch();
+  const checkAuth = async () => {
+    const token = getToken();
+    try {
+      if (token) {
+        const data = await AuthService.getProfile();
+        if (data) {
+          dispatch(login(data));
+        } else {
+          dispatch(logout());
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
-export default App
+  return <RouterProvider router={router} />;
+};
+
+export default App;
