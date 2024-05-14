@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaBtc, FaSignOutAlt } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
 import { useAppDispatch } from "../store/hooks";
 import { logout } from "../store/user/userSlice";
