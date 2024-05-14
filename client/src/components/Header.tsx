@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
@@ -7,11 +7,20 @@ import { logout } from "../store/user/userSlice";
 import { removeToken } from "../helpers/localstorage.helper";
 import { toast } from "react-toastify";
 import { SiNintendogamecube } from "react-icons/si";
+import generateScramble from "../services/scramble.service";
 
 const Header: FC = () => {
   const isAuth = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [scramble, setScramble] = useState<
+    { move: string; modifier: string }[]
+  >([]); // Initialize scramble state as an array of move-modifier objects
+
+  useEffect(() => {
+    const newScramble = generateScramble(20); // Generate a new scramble
+    setScramble(newScramble); // Set the scramble state
+  }, []);
 
   const logoutHandler = () => {
     dispatch(logout());
@@ -21,13 +30,15 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="bg-slate-800 p-4 flex items-center justify-between">
+    <header className="bg-slate-800 p-8 flex items-center justify-between">
       <Link to="/">
-        <SiNintendogamecube size={20} />
+        <SiNintendogamecube size={40} />
       </Link>
 
-      <div>
-        <p>P A O D F N A P O R N Q P R N Q P N</p>
+      <div className="flex gap-3 text-xl">
+        {scramble.map((move, index) => (
+          <span key={index}>{move.move + move.modifier} </span>
+        ))}
       </div>
 
       {isAuth ? (
