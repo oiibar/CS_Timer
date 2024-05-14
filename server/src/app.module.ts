@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SessionsModule } from './sessions/sessions.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         entities: [__dirname + '/**/*.entity{.js, .ts}'],
       }),
     }),
+    SessionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
