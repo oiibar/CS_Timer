@@ -1,27 +1,22 @@
+import { Session } from 'src/session/entities/session.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
 export class Sessions {
-  @PrimaryGeneratedColumn({ name: 'session_id' })
+  @PrimaryGeneratedColumn({ name: 'sessions_id' })
   id: number;
-
-  @Column()
-  title: string;
 
   @ManyToOne(() => User, (user) => user.sessions)
   user: User;
 
-  @CreateDateColumn()
-  created_at: Date;
-
-  @UpdateDateColumn()
-  updated_at: Date;
+  @OneToMany(() => Session, (session) => session.sessions)
+  session: Session[];
 }

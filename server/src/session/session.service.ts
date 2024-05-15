@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CreateSessionDto } from './dto/create-sessions.dto';
-import { UpdateSessionDto } from './dto/update-sessions.dto';
+import { CreateSessionDto } from './dto/create-session.dto';
+import { UpdateSessionDto } from './dto/update-session.dto';
 
 @Injectable()
-export class SessionsService {
+export class SessionService {
   create(createSessionDto: CreateSessionDto) {
     return 'This action adds a new session';
   }
 
   findAll() {
-    return `This action returns all sessions`;
+    return `This action returns all session`;
   }
 
   findOne(id: number) {
