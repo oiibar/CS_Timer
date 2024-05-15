@@ -9,12 +9,12 @@ import {
   UseGuards,
   UsePipes,
   ValidationPipe,
+  Req,
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';
 import { CreateSessionsDto } from './dto/create-sessions.dto';
 import { UpdateSessionDto } from './dto/update-sessions.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { AuthorGuard } from 'src/guard/author.guard';
 
 @Controller('sessions')
 export class SessionsController {
@@ -23,8 +23,8 @@ export class SessionsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
-  create(@Body() createSessionDto: CreateSessionsDto) {
-    return this.sessionsService.create(createSessionDto);
+  create(@Body() createSessionDto: CreateSessionsDto, @Req() req) {
+    return this.sessionsService.create(createSessionDto, +req.user.id);
   }
 
   @Get()
@@ -35,21 +35,21 @@ export class SessionsController {
   }
 
   @Get(':type/:id')
-  @UseGuards(JwtAuthGuard, AuthorGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   findOne(@Param('id') id: string) {
     return this.sessionsService.findOne(+id);
   }
 
   @Patch(':type/:id')
-  @UseGuards(JwtAuthGuard, AuthorGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   update(@Param('id') id: string, @Body() updateSessionDto: UpdateSessionDto) {
     return this.sessionsService.update(+id, updateSessionDto);
   }
 
   @Delete(':type/:id')
-  @UseGuards(JwtAuthGuard, AuthorGuard)
+  @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   remove(@Param('id') id: string) {
     return this.sessionsService.remove(+id);
