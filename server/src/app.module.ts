@@ -5,10 +5,13 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SessionsModule } from './sessions/sessions.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    UserModule,
     AuthModule,
+    SessionsModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -24,7 +27,6 @@ import { SessionsModule } from './sessions/sessions.module';
         entities: [__dirname + '/**/*.entity{.js, .ts}'],
       }),
     }),
-    SessionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

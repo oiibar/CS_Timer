@@ -29,7 +29,6 @@ export class SessionsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  @UsePipes(new ValidationPipe())
   findAll(@Req() req) {
     return this.sessionsService.findAll(+req.user.id);
   }

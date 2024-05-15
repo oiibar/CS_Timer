@@ -19,7 +19,7 @@ export class SessionsService {
   async create(createSessionsDto: CreateSessionsDto, id: number) {
     const newSession = {
       time: createSessionsDto.time,
-      scrumble: createSessionsDto.scramble,
+      scramble: createSessionsDto.scramble,
       extraTwo: createSessionsDto.extraTwo,
       DNF: createSessionsDto.DNF,
       user: { id },
