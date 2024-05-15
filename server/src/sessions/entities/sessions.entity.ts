@@ -1,5 +1,6 @@
 import { User } from 'src/user/entities/user.entity';
 import {
+  Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
@@ -11,6 +12,18 @@ import {
 export class Sessions {
   @PrimaryGeneratedColumn({ name: 'session_id' })
   id: number;
+
+  @Column()
+  scramble: string;
+
+  @Column()
+  time: number;
+
+  @Column({ default: false })
+  extraTwo: boolean;
+
+  @Column({ default: false })
+  DNF: boolean;
 
   @ManyToOne(() => User, (user) => user.sessions)
   user: User;

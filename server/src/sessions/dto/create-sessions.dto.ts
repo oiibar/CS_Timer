@@ -3,7 +3,13 @@ import { User } from 'src/user/entities/user.entity';
 
 export class CreateSessionsDto {
   @IsNotEmpty()
-  sessions: string[];
+  scramble: string;
+  @IsNotEmpty()
+  time: number;
+  @IsNotEmpty()
+  extraTwo: boolean;
+  @IsNotEmpty()
+  DNF: boolean;
   @IsOptional()
   user?: User;
 }
