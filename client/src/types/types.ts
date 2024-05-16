@@ -22,10 +22,16 @@ export interface User {
   id: number;
 }
 
-export interface Category {
-  title: string;
+export interface ResponseSessionsLoader {
+  sessions: Session[];
+}
+
+export interface Session {
   id: number;
-  createdAt: string;
-  updatedAt: string;
-  transactions: [];
+  scramble: string;
+  time: number;
+  extraTwo: boolean;
+  DNF: boolean;
+  created_at: string;
+  updated_at: string;
 }
