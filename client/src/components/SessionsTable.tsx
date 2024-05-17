@@ -7,8 +7,8 @@ import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
 
 export const SessionsLoader = async () => {
-  const transactions = await instance.get<Session[]>("/sessions");
-  return { transactions: transactions.data };
+  const sessions = await instance.get<Session[]>("/sessions");
+  return { sessions: sessions.data };
 };
 
 export const SessionsAction = async ({ request }: any) => {
@@ -35,7 +35,7 @@ export const SessionsAction = async ({ request }: any) => {
   }
 };
 
-const Sessions: FC = () => {
+const SessionsTable: FC = () => {
   const sessions = useLoaderData() as ResponseSessionsLoader;
 
   const [data, setData] = useState<Session[]>([]);
@@ -82,4 +82,4 @@ const Sessions: FC = () => {
   );
 };
 
-export default Sessions;
+export default SessionsTable;

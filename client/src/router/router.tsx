@@ -4,10 +4,8 @@ import Layout from "../pages/Layout";
 import Home from "../pages/Home";
 import Auth from "../pages/Auth";
 import ProtectedRoute from "../components/ProtectedRoute";
-import Sessions, {
-  SessionsAction,
-  SessionsLoader,
-} from "../components/Sessions";
+import { SessionsAction, SessionsLoader } from "../components/SessionsTable";
+import Sessions from "../pages/Sessions";
 
 export const router = createBrowserRouter([
   {

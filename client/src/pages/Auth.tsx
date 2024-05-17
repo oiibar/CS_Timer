@@ -35,7 +35,7 @@ const Auth: FC = () => {
         setToken("token", data.token);
         dispatch(login(data));
         toast.success("Logged in successfully");
-        navigate("/");
+        navigate("/sessions");
       }
     } catch (err: any) {
       const error = err.response?.data.message;
