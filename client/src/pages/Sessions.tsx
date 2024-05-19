@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import SessionsTable from "../components/SessionsTable";
+import Modal from "../components/Modal";
 
 const Main: FC = (): JSX.Element => {
   const [startTime, setStartTime] = useState<number | null>(null);

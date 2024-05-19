@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { Form, useLoaderData } from "react-router-dom";
 import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
+import Modal from "./Modal";
 
 export const SessionsLoader = async () => {
   const sessions = await instance.get<Session[]>("/sessions");
@@ -39,6 +40,9 @@ const SessionsTable: FC = () => {
   const sessions = useLoaderData() as ResponseSessionsLoader;
 
   const [data, setData] = useState<Session[]>([]);
+  const [visible, setVisible] = useState<boolean>(false);
+  const [sessionId, setSessionId] = useState<number>(0);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const fetchSessions = async () => {
     const response = await instance.get(`/sessions`);
@@ -50,34 +54,54 @@ const SessionsTable: FC = () => {
   }, [sessions]);
 
   return (
-    <aside className="bg-slate-700 h-screen max-w-64 p-4">
-      <table className="table-auto text-center border-2 border-slate-800">
-        <thead>
-          <tr>
-            <td className="font-bold">№</td>
-            <td className="font-bold">Time</td>
-            <td className="font-bold">Date</td>
-            <td className="font-bold">Del</td>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((sessions, id) => (
-            <tr key={id}>
-              <td className="p-2">{id + 1}</td>
-              <td className="p-2">{sessions.time}</td>
-              <td className="p-2">{formatDate(sessions.created_at)}</td>
-              <td className="p-2">
-                <Form method="DELETE" action="/sessions">
-                  <input type="hidden" name="id" value={sessions.id} />
-                  <button className="btn hover:btn-red ml-auto">
-                    <FaTrash />
-                  </button>
-                </Form>
-              </td>
+    <aside className="bg-slate-700 h-screen max-w-64 p-4 overflow-auto">
+      {data.length ? (
+        <table className="table-auto text-center border-2 border-slate-800">
+          <thead>
+            <tr>
+              <td className="font-bold p-1 ">№</td>
+              <td className="font-bold p-2 ">Time</td>
+              <td className="font-bold p-1 ">Date</td>
+              <td className="font-bold p-1 ">Del</td>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {data.map((sessions, id) => (
+              <tr key={id}>
+                <td
+                  className="p-1 border border-slate-800"
+                  onClick={() => setSessionId(id)}
+                >
+                  {id + 1}
+                </td>
+                <td className="p-2 border border-slate-800">{sessions.time}</td>
+                <td className="p-1 border border-slate-800">
+                  {formatDate(sessions.created_at)}
+                </td>
+                <td className="p-1 border border-slate-800">
+                  <Form method="DELETE" action="/sessions">
+                    <input type="hidden" name="id" value={sessions.id} />
+                    <button className="btn hover:btn-red ml-auto">
+                      <FaTrash />
+                    </button>
+                  </Form>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div>No sessions</div>
+      )}
+
+      {visible && (
+        <Modal
+          type="patch"
+          id={sessionId}
+          sessions={data}
+          setVisibleModal={setVisible}
+        ></Modal>
+      )}
     </aside>
   );
 };

@@ -20,17 +20,17 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class SessionsController {
   constructor(private readonly sessionsService: SessionsService) {}
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  findAll(@Req() req) {
+    return this.sessionsService.findAll(+req.user.id);
+  }
+
   @Post()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())
   create(@Body() createSessionDto: CreateSessionsDto, @Req() req) {
     return this.sessionsService.create(createSessionDto, +req.user.id);
-  }
-
-  @Get()
-  @UseGuards(JwtAuthGuard)
-  findAll(@Req() req) {
-    return this.sessionsService.findAll(+req.user.id);
   }
 
   @Get(':type/:id')

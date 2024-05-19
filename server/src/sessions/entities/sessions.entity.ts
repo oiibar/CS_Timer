@@ -16,8 +16,8 @@ export class Sessions {
   @Column()
   scramble: string;
 
-  @Column()
-  time: number;
+  @Column({ type: 'real' })
+  time: string;
 
   @Column({ default: false })
   extraTwo: boolean;

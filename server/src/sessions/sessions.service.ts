@@ -18,8 +18,8 @@ export class SessionsService {
 
   async create(createSessionsDto: CreateSessionsDto, id: number) {
     const newSession = {
-      time: createSessionsDto.time,
       scramble: createSessionsDto.scramble,
+      time: createSessionsDto.time,
       extraTwo: createSessionsDto.extraTwo,
       DNF: createSessionsDto.DNF,
       user: { id },

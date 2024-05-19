@@ -5,7 +5,7 @@ export class CreateSessionsDto {
   @IsNotEmpty()
   scramble: string;
   @IsNotEmpty()
-  time: number;
+  time: string;
   @IsNotEmpty()
   extraTwo: boolean;
   @IsNotEmpty()
