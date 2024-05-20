@@ -1,12 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import SessionsTable from "../components/SessionsTable";
-import Modal from "../components/Modal";
 
 const Main: FC = (): JSX.Element => {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [running, setRunning] = useState<boolean>(false);
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
-  const [savedTimes, setSavedTimes] = useState<number[]>([]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent): void => {
@@ -16,10 +14,6 @@ const Main: FC = (): JSX.Element => {
           setRunning(true);
         } else {
           setRunning(false);
-          if (startTime !== null) {
-            const elapsed = Date.now() - startTime;
-            setSavedTimes((prevSavedTimes) => [...prevSavedTimes, elapsed]);
-          }
         }
       }
     };

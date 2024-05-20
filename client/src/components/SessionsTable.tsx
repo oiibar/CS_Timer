@@ -42,7 +42,6 @@ const SessionsTable: FC = () => {
   const [data, setData] = useState<Session[]>([]);
   const [visible, setVisible] = useState<boolean>(false);
   const [sessionId, setSessionId] = useState<number>(0);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
 
   const fetchSessions = async () => {
     const response = await instance.get(`/sessions`);
