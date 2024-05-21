@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import SessionsTable from "../components/SessionsTable";
+import { formatTime } from "../helpers/formatTime";
 
 const Main: FC = (): JSX.Element => {
   const [startTime, setStartTime] = useState<number | null>(null);
@@ -17,9 +18,7 @@ const Main: FC = (): JSX.Element => {
         }
       }
     };
-
     document.addEventListener("keydown", handleKeyPress);
-
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
@@ -27,7 +26,6 @@ const Main: FC = (): JSX.Element => {
 
   useEffect(() => {
     let timer: number | undefined;
-
     if (running) {
       timer = window.setInterval(() => {
         setTimeElapsed(Date.now() - (startTime || 0));
@@ -35,7 +33,6 @@ const Main: FC = (): JSX.Element => {
     } else if (startTime !== null) {
       setTimeElapsed(Date.now() - startTime);
     }
-
     return () => {
       if (timer) window.clearInterval(timer);
     };
@@ -45,18 +42,6 @@ const Main: FC = (): JSX.Element => {
     setStartTime(null);
     setRunning(false);
     setTimeElapsed(0);
-  };
-
-  const formatTime = (milliseconds: number): string => {
-    const minutes = Math.floor(milliseconds / 60000);
-    const seconds = Math.floor((milliseconds % 60000) / 1000);
-    const centiseconds = Math.floor((milliseconds % 1000) / 10);
-
-    return minutes > 0
-      ? `${minutes}:${String(seconds).padStart(2, "0")}.${String(
-          centiseconds
-        ).padStart(2, "0")}`
-      : `${seconds}.${String(centiseconds).padStart(2, "0")}`;
   };
 
   return (

@@ -1,11 +1,10 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
+import { Form } from "react-router-dom";
 import { instance } from "../api/axios.api";
-import { ResponseSessionsLoader, Session } from "../types/types";
+import { Session } from "../types/types";
 import { toast } from "react-toastify";
-import { Form, useLoaderData } from "react-router-dom";
 import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
-import Modal from "./Modal";
 
 export const SessionsLoader = async () => {
   const sessions = await instance.get<Session[]>("/sessions");
@@ -37,20 +36,7 @@ export const SessionsAction = async ({ request }: any) => {
 };
 
 const SessionsTable: FC = () => {
-  const sessions = useLoaderData() as ResponseSessionsLoader;
-
   const [data, setData] = useState<Session[]>([]);
-  const [visible, setVisible] = useState<boolean>(false);
-  const [sessionId, setSessionId] = useState<number>(0);
-
-  const fetchSessions = async () => {
-    const response = await instance.get(`/sessions`);
-    setData(response.data);
-  };
-
-  useEffect(() => {
-    fetchSessions();
-  }, [sessions]);
 
   return (
     <aside className="bg-slate-700 h-screen max-w-64 p-4 overflow-auto">
@@ -67,12 +53,7 @@ const SessionsTable: FC = () => {
           <tbody>
             {data.map((sessions, id) => (
               <tr key={id}>
-                <td
-                  className="p-1 border border-slate-800"
-                  onClick={() => setSessionId(id)}
-                >
-                  {id + 1}
-                </td>
+                <td className="p-1 border border-slate-800">{id + 1}</td>
                 <td className="p-2 border border-slate-800">{sessions.time}</td>
                 <td className="p-1 border border-slate-800">
                   {formatDate(sessions.created_at)}
@@ -91,15 +72,6 @@ const SessionsTable: FC = () => {
         </table>
       ) : (
         <div>No sessions</div>
-      )}
-
-      {visible && (
-        <Modal
-          type="patch"
-          id={sessionId}
-          sessions={data}
-          setVisibleModal={setVisible}
-        ></Modal>
       )}
     </aside>
   );
