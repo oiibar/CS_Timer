@@ -1,3 +1,5 @@
+// SessionsTable.tsx
+
 import { FC } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { instance } from "../api/axios.api";
@@ -20,18 +22,16 @@ export const SessionsAction = async ({ request }: any) => {
       const newSession = {
         time: +formData.get("time"),
         scramble: formData.get("scramble"),
-        extraTwo: formData.get("extraTwo"),
-        DNF: formData.get("DNF"),
+        extraTwo: formData.get("extraTwo") === "true",
+        DNF: formData.get("DNF") === "true",
       };
       await instance.post("/sessions", newSession);
-      toast.success("Session added successfully");
       return null;
     }
     case "DELETE": {
       const formData = await request.formData();
       const sessionId = formData.get("id");
       await instance.delete(`/sessions/session/${sessionId}`);
-      toast.success("Deleted successfully");
       return null;
     }
   }

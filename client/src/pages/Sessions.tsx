@@ -2,14 +2,21 @@ import { FC, useEffect, useState } from "react";
 import SessionsTable from "../components/SessionsTable";
 import { formatTime } from "../helpers/formatTime";
 import { Session } from "../types/types";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useSubmit } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { setScramble } from "../store/scramble/scramble.slice";
+import generateScramble from "../services/scramble.service";
+import { selectScramble } from "../store/scramble/scramble.slice";
 
 const Main: FC = (): JSX.Element => {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [running, setRunning] = useState<boolean>(false);
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
-
   const sessions = useLoaderData() as Session[];
+  const dispatch = useAppDispatch();
+  const submit = useSubmit();
+  const scramble = useAppSelector(selectScramble);
+  const [sessionSaved, setSessionSaved] = useState<boolean>(false);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent): void => {
@@ -17,6 +24,7 @@ const Main: FC = (): JSX.Element => {
         if (!running) {
           setStartTime(Date.now());
           setRunning(true);
+          setSessionSaved(false);
         } else {
           setRunning(false);
         }
@@ -26,7 +34,7 @@ const Main: FC = (): JSX.Element => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [running, startTime]);
+  }, [running]);
 
   useEffect(() => {
     let timer: number | undefined;
@@ -34,18 +42,39 @@ const Main: FC = (): JSX.Element => {
       timer = window.setInterval(() => {
         setTimeElapsed(Date.now() - (startTime || 0));
       }, 10);
-    } else if (startTime !== null) {
+    } else if (startTime !== null && !sessionSaved) {
       setTimeElapsed(Date.now() - startTime);
+      dispatch(setScramble(generateScramble()));
+      submit(
+        {
+          time: formatTime(timeElapsed).toString(),
+          scramble: scramble,
+          extraTwo: "false",
+          DNF: "false",
+        },
+        { method: "POST", action: "/sessions" }
+      );
+
+      setSessionSaved(true);
     }
     return () => {
       if (timer) window.clearInterval(timer);
     };
-  }, [running, startTime]);
+  }, [
+    running,
+    startTime,
+    timeElapsed,
+    dispatch,
+    scramble,
+    submit,
+    sessionSaved,
+  ]);
 
   const handleReset = (): void => {
     setStartTime(null);
     setRunning(false);
     setTimeElapsed(0);
+    setSessionSaved(false);
   };
 
   return (
