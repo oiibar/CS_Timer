@@ -5,6 +5,8 @@ import { Session } from "../types/types";
 import { toast } from "react-toastify";
 import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
+import { useAppSelector } from "../store/hooks";
+import { selectScramble } from "../store/scramble/scramble.slice";
 
 export const SessionsLoader = async () => {
   const { data } = await instance.get<Session[]>("/sessions");
@@ -37,6 +39,7 @@ export const SessionsAction = async ({ request }: any) => {
 
 const SessionsTable: FC = () => {
   const sessions = useLoaderData() as Session[];
+  const scramble = useAppSelector(selectScramble);
 
   return (
     <aside className="bg-slate-700 h-screen max-w-64 p-4 overflow-auto">

@@ -1,24 +1,21 @@
-import { FC, useEffect, useState } from "react";
+// Header.tsx
+
+import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "../hooks/useAuth";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { logout } from "../store/user/userSlice";
 import { removeToken } from "../helpers/localstorage.helper";
 import { toast } from "react-toastify";
 import { SiNintendogamecube } from "react-icons/si";
-import generateScramble from "../services/scramble.service";
+import { selectScramble } from "../store/scramble/scramble.slice";
 
 const Header: FC = () => {
   const isAuth = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [scramble, setScramble] = useState("");
-
-  useEffect(() => {
-    const newScramble = generateScramble();
-    setScramble(newScramble);
-  }, []);
+  const scramble = useAppSelector(selectScramble);
 
   const logoutHandler = () => {
     dispatch(logout());
