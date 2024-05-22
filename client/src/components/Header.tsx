@@ -33,7 +33,11 @@ const Header: FC = () => {
         <SiNintendogamecube size={40} />
       </Link>
 
-      <div className="flex gap-3 text-xl">{scramble}</div>
+      <div className="flex gap-3 text-xl">
+        {scramble.split(" ").map((move, index) => (
+          <span key={index}>{move}</span>
+        ))}
+      </div>
 
       {isAuth ? (
         <button className="btn btn-red" onClick={logoutHandler}>

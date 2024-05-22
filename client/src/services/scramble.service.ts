@@ -21,6 +21,6 @@ export default function generateScramble(): string {
   }
 
   let res = "";
-  scramble.map((move) => (res += ` ${move.move + move.modifier} `));
+  scramble.map((move) => (res += `${move.move + move.modifier} `));
   return res;
 }
