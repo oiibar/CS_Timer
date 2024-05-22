@@ -1,11 +1,15 @@
 import { FC, useEffect, useState } from "react";
 import SessionsTable from "../components/SessionsTable";
 import { formatTime } from "../helpers/formatTime";
+import { Session } from "../types/types";
+import { useLoaderData } from "react-router-dom";
 
 const Main: FC = (): JSX.Element => {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [running, setRunning] = useState<boolean>(false);
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
+
+  const sessions = useLoaderData() as Session[];
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent): void => {
@@ -52,10 +56,18 @@ const Main: FC = (): JSX.Element => {
           <div className="text-9xl">{formatTime(timeElapsed)}</div>
           <div className="text-3xl">
             <p>
-              ao5: <span>4.73</span>
-            </p>
-            <p>
-              ao12: <span>4.73</span>
+              ao5:{" "}
+              <span>
+                {Math.round(
+                  ((sessions[0].time +
+                    sessions[1].time +
+                    sessions[2].time +
+                    sessions[3].time +
+                    sessions[4].time) /
+                    5) *
+                    100
+                ) / 100}
+              </span>
             </p>
           </div>
           <button

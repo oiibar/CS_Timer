@@ -15,11 +15,11 @@ const Header: FC = () => {
   const navigate = useNavigate();
   const [scramble, setScramble] = useState<
     { move: string; modifier: string }[]
-  >([]); // Initialize scramble state as an array of move-modifier objects
+  >([]);
 
   useEffect(() => {
-    const newScramble = generateScramble(20); // Generate a new scramble
-    setScramble(newScramble); // Set the scramble state
+    const newScramble = generateScramble(20);
+    setScramble(newScramble);
   }, []);
 
   const logoutHandler = () => {

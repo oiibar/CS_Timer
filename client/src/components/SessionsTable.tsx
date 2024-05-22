@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { Form } from "react-router-dom";
+import { FC } from "react";
+import { Form, useLoaderData } from "react-router-dom";
 import { instance } from "../api/axios.api";
 import { Session } from "../types/types";
 import { toast } from "react-toastify";
@@ -7,8 +7,8 @@ import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
 
 export const SessionsLoader = async () => {
-  const sessions = await instance.get<Session[]>("/sessions");
-  return { sessions: sessions.data };
+  const { data } = await instance.get<Session[]>("/sessions");
+  return data;
 };
 
 export const SessionsAction = async ({ request }: any) => {
@@ -36,11 +36,11 @@ export const SessionsAction = async ({ request }: any) => {
 };
 
 const SessionsTable: FC = () => {
-  const [data, setData] = useState<Session[]>([]);
+  const sessions = useLoaderData() as Session[];
 
   return (
     <aside className="bg-slate-700 h-screen max-w-64 p-4 overflow-auto">
-      {data.length ? (
+      {sessions.length ? (
         <table className="table-auto text-center border-2 border-slate-800">
           <thead>
             <tr>
@@ -51,16 +51,16 @@ const SessionsTable: FC = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((sessions, id) => (
+            {sessions.map((session, id) => (
               <tr key={id}>
                 <td className="p-1 border border-slate-800">{id + 1}</td>
-                <td className="p-2 border border-slate-800">{sessions.time}</td>
+                <td className="p-2 border border-slate-800">{session.time}</td>
                 <td className="p-1 border border-slate-800">
-                  {formatDate(sessions.created_at)}
+                  {formatDate(session.created_at)}
                 </td>
                 <td className="p-1 border border-slate-800">
                   <Form method="DELETE" action="/sessions">
-                    <input type="hidden" name="id" value={sessions.id} />
+                    <input type="hidden" name="id" value={session.id} />
                     <button className="btn hover:btn-red ml-auto">
                       <FaTrash />
                     </button>

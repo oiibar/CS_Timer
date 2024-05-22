@@ -33,6 +33,9 @@ export class SessionsService {
       where: {
         user: { id },
       },
+      order: {
+        created_at: 'DESC',
+      },
     });
   }
 
