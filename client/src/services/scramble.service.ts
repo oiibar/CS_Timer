@@ -1,33 +1,4 @@
-// export default function generateScramble(
-//   length: number
-// ): { move: string; modifier: string }[] {
-//   function getRandomInt(max: number): number {
-//     return Math.floor(Math.random() * max);
-//   }
-
-//   const moves = ["U", "D", "L", "R", "F", "B"];
-//   const modifiers = ["", "'", "2"];
-
-//   let scramble = [];
-
-//   let prevMove = "";
-//   for (let i = 0; i < length; i++) {
-//     let randomMove = moves[getRandomInt(moves.length)];
-//     while (randomMove === prevMove) {
-//       randomMove = moves[getRandomInt(moves.length)];
-//     }
-//     const randomModifier = modifiers[getRandomInt(modifiers.length)];
-
-//     scramble.push({ move: randomMove, modifier: randomModifier });
-//     prevMove = randomMove;
-//   }
-
-//   return scramble;
-// }
-
-export default function generateScramble(
-  length: number
-): { move: string; modifier: string }[] {
+export default function generateScramble(): string {
   function getRandomInt(max: number): number {
     return Math.floor(Math.random() * max);
   }
@@ -38,7 +9,7 @@ export default function generateScramble(
   let scramble = [];
 
   let prevMove = "";
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < 20; i++) {
     let randomMove = moves[getRandomInt(moves.length)];
     while (randomMove === prevMove) {
       randomMove = moves[getRandomInt(moves.length)];
@@ -49,5 +20,7 @@ export default function generateScramble(
     prevMove = randomMove;
   }
 
-  return scramble;
+  let res = "";
+  scramble.map((move) => (res += ` ${move.move + move.modifier} `));
+  return res;
 }

@@ -13,12 +13,10 @@ const Header: FC = () => {
   const isAuth = useAuth();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [scramble, setScramble] = useState<
-    { move: string; modifier: string }[]
-  >([]);
+  const [scramble, setScramble] = useState("");
 
   useEffect(() => {
-    const newScramble = generateScramble(20);
+    const newScramble = generateScramble();
     setScramble(newScramble);
   }, []);
 
@@ -35,11 +33,7 @@ const Header: FC = () => {
         <SiNintendogamecube size={40} />
       </Link>
 
-      <div className="flex gap-3 text-xl">
-        {scramble.map((move, index) => (
-          <span key={index}>{move.move + move.modifier} </span>
-        ))}
-      </div>
+      <div className="flex gap-3 text-xl">{scramble}</div>
 
       {isAuth ? (
         <button className="btn btn-red" onClick={logoutHandler}>
