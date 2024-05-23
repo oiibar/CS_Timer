@@ -11,7 +11,7 @@ const Main: FC = (): JSX.Element => {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [running, setRunning] = useState<boolean>(false);
   const [timeElapsed, setTimeElapsed] = useState<number>(0);
-  const [submitted, setSubmitted] = useState<boolean>(false); // New state
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const sessions = useLoaderData() as Session[];
   const dispatch = useAppDispatch();
   const submit = useSubmit();
@@ -23,7 +23,7 @@ const Main: FC = (): JSX.Element => {
         if (!running) {
           setStartTime(Date.now());
           setRunning(true);
-          setSubmitted(false); // Reset the submission state
+          setSubmitted(false);
         } else {
           setRunning(false);
         }
@@ -62,7 +62,7 @@ const Main: FC = (): JSX.Element => {
     (elapsed: number) => {
       submit(
         {
-          time: formatTime(elapsed).toString(),
+          time: elapsed.toString(), // Format the time before submitting
           scramble: scramble,
           extraTwo: "false",
           DNF: "false",
@@ -81,6 +81,27 @@ const Main: FC = (): JSX.Element => {
     setSubmitted(false);
   };
 
+  const calculateAo5 = (sessions: Session[]): number => {
+    const recentSessions = [...sessions]
+      .sort(
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      )
+      .slice(0, 5);
+
+    if (recentSessions.length < 5) {
+      return 0;
+    }
+
+    const times = recentSessions.map((session) =>
+      parseFloat(session.time.toString())
+    );
+    const sum = times.reduce((acc, curr) => acc + curr, 0);
+    return sum / times.length;
+  };
+
+  const ao5 = calculateAo5(sessions);
+
   return (
     <div className="flex">
       <SessionsTable />
@@ -89,7 +110,7 @@ const Main: FC = (): JSX.Element => {
           <div className="text-9xl">{formatTime(timeElapsed)}</div>
           <div className="text-3xl">
             <p>
-              ao5: <span>{5}</span>
+              ao5: <span>{ao5 > 0 ? formatTime(ao5) : "--"}</span>
             </p>
           </div>
 
