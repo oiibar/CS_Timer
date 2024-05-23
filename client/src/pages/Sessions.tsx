@@ -81,15 +81,15 @@ const Main: FC = (): JSX.Element => {
     setSubmitted(false);
   };
 
-  const calculateAo5 = (sessions: Session[]): number => {
+  const calculateAverage = (sessions: Session[], count: number): number => {
     const recentSessions = [...sessions]
       .sort(
         (a, b) =>
           new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       )
-      .slice(0, 5);
+      .slice(0, count);
 
-    if (recentSessions.length < 5) {
+    if (recentSessions.length < count) {
       return 0;
     }
 
@@ -100,7 +100,8 @@ const Main: FC = (): JSX.Element => {
     return sum / times.length;
   };
 
-  const ao5 = calculateAo5(sessions);
+  const ao5 = calculateAverage(sessions, 5);
+  const ao12 = calculateAverage(sessions, 12);
 
   return (
     <div className="flex">
@@ -111,6 +112,9 @@ const Main: FC = (): JSX.Element => {
           <div className="text-3xl">
             <p>
               ao5: <span>{ao5 > 0 ? formatTime(ao5) : "--"}</span>
+            </p>
+            <p>
+              ao12: <span>{ao12 > 0 ? formatTime(ao12) : "--"}</span>
             </p>
           </div>
 
