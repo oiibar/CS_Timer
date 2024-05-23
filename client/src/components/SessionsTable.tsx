@@ -1,10 +1,7 @@
-// SessionsTable.tsx
-
 import { FC } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { instance } from "../api/axios.api";
 import { Session } from "../types/types";
-import { toast } from "react-toastify";
 import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
 import { useAppSelector } from "../store/hooks";
@@ -42,13 +39,14 @@ const SessionsTable: FC = () => {
   const scramble = useAppSelector(selectScramble);
 
   return (
-    <aside className="bg-slate-700 h-screen max-w-64 p-4 overflow-auto">
+    <aside className="bg-slate-700 h-screen p-4 overflow-auto">
       {sessions.length ? (
         <table className="table-auto text-center border-2 border-slate-800">
           <thead>
             <tr>
               <td className="font-bold p-1 ">№</td>
               <td className="font-bold p-2 ">Time</td>
+              <td className="font-bold p-1 ">Scramble</td>
               <td className="font-bold p-1 ">Date</td>
               <td className="font-bold p-1 ">Del</td>
             </tr>
@@ -58,6 +56,9 @@ const SessionsTable: FC = () => {
               <tr key={id}>
                 <td className="p-1 border border-slate-800">{id + 1}</td>
                 <td className="p-2 border border-slate-800">{session.time}</td>
+                <td className="p-2 border border-slate-800">
+                  {session.scramble}
+                </td>
                 <td className="p-1 border border-slate-800">
                   {formatDate(session.created_at)}
                 </td>

@@ -71,4 +71,18 @@ export class SessionsService {
 
     return await this.sessionsRepository.delete(id);
   }
+
+  // New method to remove all sessions for a specific user
+  async removeAll(userId: number) {
+    const sessions = await this.sessionsRepository.find({
+      where: {
+        user: { id: userId },
+      },
+    });
+
+    if (!sessions.length)
+      throw new NotFoundException('No sessions found for the user!');
+
+    return await this.sessionsRepository.delete({ user: { id: userId } });
+  }
 }

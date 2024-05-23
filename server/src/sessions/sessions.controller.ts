@@ -53,4 +53,12 @@ export class SessionsController {
   remove(@Param('id') id: string) {
     return this.sessionsService.remove(+id);
   }
+
+  // New route to delete all sessions for the authenticated user
+  @Delete()
+  @UseGuards(JwtAuthGuard)
+  @UsePipes(new ValidationPipe())
+  removeAll(@Req() req) {
+    return this.sessionsService.removeAll(+req.user.id);
+  }
 }
