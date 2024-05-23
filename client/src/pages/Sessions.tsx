@@ -82,12 +82,7 @@ const Main: FC = (): JSX.Element => {
   };
 
   const calculateAverage = (sessions: Session[], count: number): number => {
-    const recentSessions = [...sessions]
-      .sort(
-        (a, b) =>
-          new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      )
-      .slice(0, count);
+    const recentSessions = sessions.slice(0, count);
 
     if (recentSessions.length < count) {
       return 0;

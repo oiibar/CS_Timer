@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { instance } from "../api/axios.api";
 import { Session } from "../types/types";
@@ -23,6 +23,12 @@ export const SessionsAction = async ({ request }: any) => {
         DNF: formData.get("DNF") === "true",
       };
       await instance.post("/sessions", newSession);
+      return null;
+    }
+    case "GET": {
+      const formData = await request.formData();
+      const sessionId = formData.get("id");
+      await instance.get(`/sessions/session/${sessionId}`);
       return null;
     }
     case "DELETE": {
