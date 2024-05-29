@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SessionsModule } from './sessions/sessions.module';
 import { UserModule } from './user/user.module';
+import * as fs from 'fs';
 
 @Module({
   imports: [
@@ -24,6 +25,10 @@ import { UserModule } from './user/user.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         synchronize: true,
+        ssl: {
+          rejectUnauthorized: true,
+          ca: fs.readFileSync('src/ca.pem').toString(),
+        },
         entities: [__dirname + '/**/*.entity{.js, .ts}'],
       }),
     }),
