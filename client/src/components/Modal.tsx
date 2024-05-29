@@ -12,7 +12,7 @@ const SessionModal: FC<SessionModalProps> = ({
   session,
   isOpen,
   onClose,
-  onSave,
+  //onSave,
 }) => {
   const [dnf, setDnf] = useState(false);
   const [extraTwo, setExtraTwo] = useState(false);
@@ -26,18 +26,18 @@ const SessionModal: FC<SessionModalProps> = ({
     }
   }, [session]);
 
-  const handleSave = () => {
-    let newTime = session?.time || 0;
-    if (dnf) {
-      newTime = NaN; // Represent DNF as NaN
-    } else if (extraTwo) {
-      newTime += 2000; // Add 2 seconds in milliseconds
-    }
-    if (session) {
-      onSave({ ...session, time: newTime, DNF: dnf, extraTwo: extraTwo });
-    }
-    onClose();
-  };
+  //   const handleSave = () => {
+  //     let newTime = session?.time || 0;
+  //     if (dnf) {
+  //       newTime = NaN; // Represent DNF as NaN
+  //     } else if (extraTwo) {
+  //       newTime += 2000; // Add 2 seconds in milliseconds
+  //     }
+  //     if (session) {
+  //       onSave({ ...session, time: newTime, DNF: dnf, extraTwo: extraTwo });
+  //     }
+  //     onClose();
+  //   };
 
   if (!isOpen || !session) return null;
 
