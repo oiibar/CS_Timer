@@ -1,11 +1,10 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { instance } from "../api/axios.api";
 import { Session } from "../types/types";
 import { formatDate } from "../helpers/date.helper";
 import { FaTrash } from "react-icons/fa";
-import { useAppSelector } from "../store/hooks";
-import { selectScramble } from "../store/scramble/scramble.slice";
+import { formatTime } from "../helpers/formatTime"; // Import the formatTime function
 
 export const SessionsLoader = async () => {
   const { data } = await instance.get<Session[]>("/sessions");
@@ -42,7 +41,6 @@ export const SessionsAction = async ({ request }: any) => {
 
 const SessionsTable: FC = () => {
   const sessions = useLoaderData() as Session[];
-  const scramble = useAppSelector(selectScramble);
 
   return (
     <aside className="bg-slate-700 h-screen p-4 overflow-auto">
@@ -50,18 +48,22 @@ const SessionsTable: FC = () => {
         <table className="table-auto text-center border-2 border-slate-800">
           <thead>
             <tr>
-              <td className="font-bold p-1 ">№</td>
-              <td className="font-bold p-2 ">Time</td>
-              <td className="font-bold p-1 ">Scramble</td>
-              <td className="font-bold p-1 ">Date</td>
-              <td className="font-bold p-1 ">Del</td>
+              <td className="font-bold p-1">№</td>
+              <td className="font-bold p-2">Time (s)</td>{" "}
+              {/* Add (s) to indicate seconds */}
+              <td className="font-bold p-1">Scramble</td>
+              <td className="font-bold p-1">Date</td>
+              <td className="font-bold p-1">Del</td>
             </tr>
           </thead>
           <tbody>
             {sessions.map((session, id) => (
               <tr key={id}>
                 <td className="p-1 border border-slate-800">{id + 1}</td>
-                <td className="p-2 border border-slate-800">{session.time}</td>
+                <td className="p-2 border border-slate-800">
+                  {formatTime(session.time)}{" "}
+                  {/* Format time to display in seconds */}
+                </td>
                 <td className="p-2 border border-slate-800">
                   {session.scramble}
                 </td>
