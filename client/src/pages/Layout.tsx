@@ -4,10 +4,10 @@ import Header from "../components/Header";
 
 const Layout: FC = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-900 font-roboto text-white">
+    <body className="flex flex-col bg-slate-900 font-roboto text-white">
       <Header />
       <Outlet />
-    </div>
+    </body>
   );
 };
 

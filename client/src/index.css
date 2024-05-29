@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply text-sm;
+    @apply text-sm p-0 min-h-screen overflow-y-hidden;
   }
   td {
     @apply capitalize;

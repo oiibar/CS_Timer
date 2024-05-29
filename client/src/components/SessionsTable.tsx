@@ -81,7 +81,7 @@ const SessionsTable: FC = () => {
         onClose={handleModalClose}
         onSave={handleSave}
       />
-      <aside className="bg-slate-700 h-screen p-4 overflow-auto flex flex-col gap-2">
+      <aside className="bg-slate-700 min-h-screen p-4 overflow-auto flex flex-col gap-2">
         {sessions.length ? (
           <>
             {fastestSession && (
