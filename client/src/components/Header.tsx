@@ -27,10 +27,10 @@ const Header: FC = () => {
   return (
     <header className="bg-slate-800 p-8 flex items-center justify-between">
       <Link to="/">
-        <SiNintendogamecube size={40} />
+        <SiNintendogamecube size={40} className="mr-4" />
       </Link>
 
-      <div className="flex gap-3 text-xl">
+      <div className="flex gap-3 text-xl flex-wrap mr-4">
         {scramble.split(" ").map((move, index) => (
           <span key={index}>{move}</span>
         ))}

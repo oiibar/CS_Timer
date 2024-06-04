@@ -81,7 +81,7 @@ const SessionsTable: FC = () => {
         onClose={handleModalClose}
         onSave={handleSave}
       />
-      <aside className="bg-slate-700 min-h-screen p-4 overflow-auto flex flex-col gap-2">
+      <aside className="bg-slate-700 min-h-screen p-2 overflow-auto flex flex-col gap-2 mr-4">
         {sessions.length ? (
           <>
             {fastestSession && (
@@ -101,7 +101,7 @@ const SessionsTable: FC = () => {
                 <tr>
                   <td className="font-bold p-1">№</td>
                   <td className="font-bold p-2">Time</td>
-                  <td className="font-bold p-1">Date</td>
+                  <td className="font-bold p-1 max-md:hidden">Date</td>
                   <td className="font-bold p-1">Del</td>
                 </tr>
               </thead>
@@ -116,7 +116,7 @@ const SessionsTable: FC = () => {
                     <td className="p-2 border border-slate-800">
                       {formatTime(session.time)}
                     </td>
-                    <td className="p-1 border border-slate-800">
+                    <td className="p-1 border border-slate-800 max-md:hidden">
                       {formatDate(session.created_at)}
                     </td>
                     <td className="p-1 border border-slate-800">
