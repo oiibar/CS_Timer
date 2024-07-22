@@ -4,17 +4,15 @@
 
 <p id="description">This is a user-friendly and simple version of a popular speecubing timer web app with user authentication</p>
 
-  
-  
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
 
-*   Authentication
-*   Registration
-*   CRUD operations
-*   Timer
-*   Rendering user sessions
+- Authentication
+- Registration
+- CRUD operations
+- Timer
+- Rendering user sessions
 
 <h2>🛠️ Installation Steps:</h2>
 
@@ -60,18 +58,24 @@ npm i
 npm run start:dev
 ```
 
-  
 <h2>💻 Built with</h2>
 
 Technologies used in the project:
 
-*   ReactJS
-*   NestJS
-*   TypeScript
-*   PostgreSQL
-*   RESTful API
-*   Redux Toolkit
+- ReactJS
+- NestJS
+- TypeScript
+- PostgreSQL
+- RESTful API
+- Redux Toolkit
 
+Here are some screenshots of the project:
+
+<p align="center">
+  <img src="./previews/Auth.png" alt="Screenshot">
+  <img src="./previews/Main.png" alt="Screenshot">
+  <img src="./previews/Details.png" alt="Screenshot">
+</p>
 
 <h2>💖Like my work?</h2>
 
