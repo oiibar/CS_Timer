@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/oiibar/CS_Timer/image?language=1&amp;name=1&amp;owner=1&amp;pattern=Solid&amp;theme=Light" alt="project-image"></p>
 
-<p id="description">This is a user-friendly and simple version of a popular speecubing timer web app with user authentication</p>
+<p id="description">This is a user-friendly and simple version of a <a href="https://cstimer.net/">popular speecubing timer</a> web app with user authentication</p>
 
 <h2>🧐 Features</h2>
 
