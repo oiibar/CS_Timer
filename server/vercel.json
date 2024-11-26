@@ -8,9 +8,11 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/[^.]+",
       "dest": "src/main.js",
-      "methods": ["GET", "PUT", "POST", "DELETE"]
+      "methods": ["GET", "PUT", "POST", "DELETE"],
+      "status": 200
     }
-  ]
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
