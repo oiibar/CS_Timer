@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { instance } from "api/axios.api";
 import { formatDate } from "helpers/date.helper";
@@ -8,7 +8,8 @@ import Modal from "components/Modal";
 import { Session } from "types/types";
 
 const SessionsTable: FC = () => {
-  const sessions = useLoaderData() as Session[];
+  const loadedSessions = useLoaderData() as Session[];
+  const [sessions, setSessions] = useState<Session[]>(loadedSessions);
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,9 +31,27 @@ const SessionsTable: FC = () => {
   };
 
   const handleSave = async (updatedSession: Session) => {
-    await instance.patch(`/sessions/${updatedSession.id}`, updatedSession);
-    setIsModalOpen(false);
-    setSelectedSession(null);
+    try {
+      const response = await instance.patch(
+        `/sessions/${updatedSession.id}`,
+        updatedSession
+      );
+      const updatedData = response.data;
+
+      // Update the sessions state with the new session data
+      setSessions((prevSessions) =>
+        prevSessions.map((session) =>
+          session.id === updatedSession.id
+            ? { ...session, ...updatedData }
+            : session
+        )
+      );
+
+      setIsModalOpen(false);
+      setSelectedSession(null);
+    } catch (error) {
+      console.error("Error updating session:", error);
+    }
   };
 
   return (
@@ -47,7 +66,7 @@ const SessionsTable: FC = () => {
         {sessions.length ? (
           <>
             {fastestSession && (
-              <table className="table-auto text-center mx-auto w-full border-2 border-slate-800 mb-4 ">
+              <table className="table-auto text-center mx-auto w-full border-2 border-slate-800 mb-4">
                 <tbody>
                   <tr className="cursor-pointer">
                     <td className="p-4 border border-slate-800">

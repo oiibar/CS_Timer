@@ -8,4 +8,8 @@ export const instance = axios.create({
   },
 });
 
-//https://cs-timer-serv.onrender.com
+// https://cstimer-production.up.railway.app/api
+
+// https://cs-timer-serv.onrender.com
+
+// http://localhost:9000/api

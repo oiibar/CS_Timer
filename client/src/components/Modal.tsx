@@ -15,25 +15,28 @@ const SessionModal: FC<SessionModalProps> = ({
   onClose,
   onSave,
 }) => {
-  const [dnf, setDnf] = useState(session?.DNF || false);
   const [extraTwo, setExtraTwo] = useState(session?.extraTwo || false);
   const [updatedTime, setUpdatedTime] = useState(session?.time || 0);
 
   useEffect(() => {
     if (session) {
-      setDnf(session.DNF);
       setExtraTwo(session.extraTwo);
       setUpdatedTime(session.time);
     }
   }, [session]);
 
   const handleSave = () => {
-    let newTime = session?.time || 0;
+    let newTime = updatedTime;
+    // If extraTwo checkbox is checked, add 2000 milliseconds (2 seconds)
     if (extraTwo) {
       newTime += 2000;
+    } else {
+      // If unchecked, subtract 2000 milliseconds (2 seconds)
+      newTime -= 2000;
     }
+
     if (session) {
-      onSave({ ...session, time: newTime, DNF: dnf, extraTwo: extraTwo });
+      onSave({ ...session, time: newTime, extraTwo: extraTwo });
       toast.success("Saved successfully");
     }
     onClose();
@@ -55,27 +58,12 @@ const SessionModal: FC<SessionModalProps> = ({
         <div className="flex justify-center items-center text-center gap-2">
           <label className="flex items-center gap-2">
             <input
-              type="radio"
+              type="checkbox"
               className="w-4 h-4 cursor-pointer"
-              checked={dnf}
-              onChange={() => {
-                setDnf(true);
-                setExtraTwo(false);
-              }}
-            />
-            DNF
-          </label>
-          <label className="flex items-center gap-2">
-            <input
-              className="w-4 h-4 cursor-pointer"
-              type="radio"
               checked={extraTwo}
-              onChange={() => {
-                setDnf(false);
-                setExtraTwo(true);
-              }}
+              onChange={() => setExtraTwo(!extraTwo)} // Toggle the checkbox state
             />
-            +2
+            +2 seconds
           </label>
         </div>
         <div className="mt-4 flex justify-center gap-2">

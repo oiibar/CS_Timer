@@ -24,6 +24,11 @@ import * as fs from 'fs';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
+        // host: 'localhost',
+        // database: 'cstimer',
+        // username: 'postgres',
+        // port: 5432,
+        // password: '123',
         synchronize: true,
         ssl: {
           rejectUnauthorized: true,

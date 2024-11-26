@@ -11,8 +11,8 @@ import { removeToken } from "helpers/localstorage.helper";
 
 const Header: FC = () => {
   const isAuth = useAuth();
-  const username = useAppSelector((state) =>
-    state.user.user?.email.charAt(0).toUpperCase()
+  const username = useAppSelector(
+    (state) => state.user.user?.email?.charAt(0).toUpperCase() || "?"
   );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -32,16 +32,20 @@ const Header: FC = () => {
       </Link>
 
       <div className="flex gap-2 text-lg flex-wrap">
-        {scramble.split(" ").map((move, index) => (
-          <span key={index}>{move}</span>
-        ))}
+        {scramble ? (
+          scramble
+            .split(" ")
+            .map((move, index) => <span key={index}>{move}</span>)
+        ) : (
+          <span>No scramble available</span>
+        )}
       </div>
 
       {isAuth ? (
         <div className="flex items-center justify-center gap-2">
           <Link
             className="w-8 h-8 flex items-center font-bold justify-center rounded-full bg-[#A8B1FF] cursor-pointer"
-            to={"profile"}
+            to="profile"
           >
             {username}
           </Link>
@@ -50,7 +54,7 @@ const Header: FC = () => {
           </button>
         </div>
       ) : (
-        <Link to={"login"} className="py-2 text-white/50 hover:text-white">
+        <Link to="login" className="py-2 text-white/50 hover:text-white">
           Log In / Sign In
         </Link>
       )}
