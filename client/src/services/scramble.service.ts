@@ -5,10 +5,9 @@ export default function generateScramble(): string {
 
   const moves = ["U", "D", "L", "R", "F", "B"];
   const modifiers = ["", "'", "2"];
-
   let scramble = [];
-
   let prevMove = "";
+
   for (let i = 0; i < 20; i++) {
     let randomMove = moves[getRandomInt(moves.length)];
     while (randomMove === prevMove) {

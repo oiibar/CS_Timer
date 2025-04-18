@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { AuthService } from "services/auth.service";
+import { AuthService } from "../../services/auth.service.ts";
 import { toast } from "react-toastify";
-import { setToken } from "helpers/localstorage.helper";
-import { useAppDispatch } from "store/hooks";
-import { login } from "store/user/userSlice";
+import { setToken } from "../../helpers/localstorage.helper.ts";
+import { useAppDispatch } from "../../store/hooks.ts";
+import { login } from "../../store/user/userSlice.ts";
 import { useNavigate } from "react-router-dom";
 
-import google from "assets/auth/google.svg";
-import github from "assets/auth/github.svg";
-import emailIcon from "assets/auth/email.svg";
-import closed from "assets/auth/closed.svg";
-import open from "assets/auth/open.svg";
-import passwordIcon from "assets/auth/password.svg";
-import unlocked from "assets/auth/unlocked.svg";
+import google from "../../assets/auth/google.svg";
+import github from "../../assets/auth/github.svg";
+import emailIcon from "../../assets/auth/email.svg";
+import closed from "../../assets/auth/closed.svg";
+import open from "../../assets/auth/open.svg";
+import passwordIcon from "../../assets/auth/password.svg";
+import unlocked from "../../assets/auth/unlocked.svg";
 
-const Auth: React.FC = () => {
+const Login: React.FC = () => {
   const [formFields, setFormFields] = useState<any>({
     email: "",
     password: "",
@@ -144,4 +144,4 @@ const Auth: React.FC = () => {
   );
 };
 
-export default Auth;
+export default Login;

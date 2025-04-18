@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "pages/ErrorPage";
 import Layout from "pages/Layout";
 import Home from "pages/Home";
-import Login from "pages/auth/Login";
+import Login from "../pages/Auth/Login.tsx";
+import Signup from "../pages/Auth/Signup.tsx";
 import Sessions from "pages/Sessions";
-import Signup from "pages/auth/Signup";
-import ProtectedRoute from "components/ProtectedRoute";
-import { SessionsAction, SessionsLoader } from "pages/Sessions";
-import AllSessions from "pages/AllSessions";
 import Profile from "pages/Profile";
+import ProtectedRoute from "components/ProtectedRoute";
+import { loader as sessionsLoader, action as sessionsAction } from "router/sessions";
+import AuthPage from "../pages/Auth/AuthPage.tsx";
 
 export const router = createBrowserRouter([
   {
@@ -22,20 +22,20 @@ export const router = createBrowserRouter([
       },
       {
         path: "sessions",
-        loader: SessionsLoader,
-        action: SessionsAction,
+        loader: sessionsLoader,
+        action: sessionsAction,
         element: (
-          <ProtectedRoute>
-            <Sessions />
-          </ProtectedRoute>
+            <ProtectedRoute>
+              <Sessions />
+            </ProtectedRoute>
         ),
       },
       {
         path: "profile",
         element: (
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
         ),
       },
       {
@@ -47,8 +47,8 @@ export const router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: "allsessions",
-        element: <AllSessions />,
+        path: "auth",
+        element: <AuthPage />,
       },
     ],
   },

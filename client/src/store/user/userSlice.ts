@@ -9,8 +9,8 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: JSON.parse(localStorage.getItem("user") || "null"), // Load persisted user
-  isAuth: !!localStorage.getItem("user"), // Check if user data exists
+  user: JSON.parse(localStorage.getItem("user") || "null"),
+  isAuth: !!localStorage.getItem("user"),
 };
 
 export const userSlice = createSlice({
@@ -20,12 +20,12 @@ export const userSlice = createSlice({
     login: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isAuth = true;
-      localStorage.setItem("user", JSON.stringify(action.payload)); // Persist user
+      localStorage.setItem("user", JSON.stringify(action.payload));
     },
     logout: (state) => {
       state.isAuth = false;
       state.user = null;
-      localStorage.removeItem("user"); // Clear persisted user
+      localStorage.removeItem("user");
     },
   },
 });

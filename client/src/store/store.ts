@@ -1,5 +1,3 @@
-// store.ts
-
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "store/user/userSlice";
 import scrambleReducer from "store/scramble/scramble.slice";

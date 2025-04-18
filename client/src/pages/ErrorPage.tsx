@@ -11,7 +11,7 @@ const ErrorPage: FC = () => {
         replace
         className="bg-sky-500 rounded-md px-6 py-2 hover:bg-sky-600"
       >
-        Back
+        Home Page
       </Link>
     </div>
   );

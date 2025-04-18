@@ -1,7 +1,6 @@
 export function getToken() {
   const data = localStorage.getItem("token");
-  const token = data ? JSON.parse(data) : "";
-  return token;
+  return data ? JSON.parse(data) : "";
 }
 
 export function setToken(key: string, token: string) {
