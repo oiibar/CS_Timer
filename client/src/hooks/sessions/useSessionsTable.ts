@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
-import { Session } from "@interfaces/sessions";
+import { Session } from "@interfaces/sessions.ts";
 // import { toast } from "react-toastify";
-import { useAsync } from "@hooks/useAsync";
+import { useAsync } from "@hooks/useAsync.ts";
 
 interface UseSessionsTableProps {
     onDelete: (id: number | string) => Promise<void>;

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@store/hooks.ts";
 import { selectScramble, selectSelectedType, setScramble } from "@store/scramble/scramble.slice.ts";
 import { Session } from "@interfaces/sessions";
 import calculateAverage from "@services/calculateAvg.service.ts";
-import scrambleGenerators from "@services/ScrambleGenerators.ts";
+import scrambleGenerators from "@services/scramble/ScrambleGenerators.ts";
 
 interface Props {
     sessions: Session[];

@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "@helpers/localstorage.helper";
 
 export const instance = axios.create({
-  baseURL: "http://localhost:10000/api",
+  baseURL: "https://cstimer-production.up.railway.app/api",
 });
 
 instance.interceptors.request.use((config) => {
@@ -16,5 +16,6 @@ instance.interceptors.request.use((config) => {
 });
 
 // https://cstimer-production.up.railway.app/api
+
 // https://cs-timer-serv.onrender.com
 // http://localhost:10000/api

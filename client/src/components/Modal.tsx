@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Session } from "@interfaces/sessions";
-import { useSessionModal } from "@hooks/useSessionModal";
+import { useSessionModal } from "@hooks/sessions/useSessionModal.ts";
 
 interface SessionModalProps {
   session: Session | null;

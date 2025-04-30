@@ -2,17 +2,18 @@
 
 <p align="center"><img src="https://socialify.git.ci/oiibar/CS_Timer/image?language=1&amp;name=1&amp;owner=1&amp;pattern=Solid&amp;theme=Light" alt="project-image"></p>
 
-<p id="description">This is a user-friendly and simple version of a <a href="https://cstimer.net/">popular speecubing timer</a> web app with user authentication</p>
+<p id="description">This is a user-friendly and simple version of a <a href="https://cstimer.net/">popular speecubing timer</a></p>
 
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
 
-- Authentication
-- Registration
-- CRUD operations
+- Auth
+- Sessions & Details
 - Timer
-- Rendering user sessions
+- Sessions Graph
+- Export sessions in CSV
+- Different puzzle types (e.g. 3x3, 2x2 etc)
 
 <h2>🛠️ Installation Steps:</h2>
 
@@ -68,13 +69,15 @@ Technologies used in the project:
 - PostgreSQL
 - RESTful API
 - Redux Toolkit
+- ReCharts
 
 Here are some screenshots of the project:
 
 <p align="center">
-  <img src="./previews/Auth.png" alt="Screenshot">
-  <img src="./previews/Main.png" alt="Screenshot">
-  <img src="./previews/Details.png" alt="Screenshot">
+  <img src="previews/auth.png" alt="Screenshot">
+  <img src="previews/main.png" alt="Screenshot">
+  <img src="previews/details.png" alt="Screenshot">
+  <img src="./previews/Chart.png" alt="Screenshot">
 </p>
 
 <h2>💖Like my work?</h2>

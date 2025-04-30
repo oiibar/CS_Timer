@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@store/store";
-import scrambleGenerators from "@services/ScrambleGenerators.ts";
+import scrambleGenerators from "@services/scramble/ScrambleGenerators.ts";
 
 interface Scramble {
   type: string;

@@ -3,7 +3,7 @@ import { Session } from "@interfaces/sessions.ts";
 import SessionModal from "./SessionModal";
 import BestTimeRow from "./BestTimeRow";
 import SessionsList from "./SessionsList";
-import { useSessionsTable } from "@hooks/useSessionsTable";
+import { useSessionsTable } from "@hooks/sessions/useSessionsTable.ts";
 import { exportSessionsToCSV } from "@helpers/exportCSV";
 import {Link} from "react-router-dom";
 

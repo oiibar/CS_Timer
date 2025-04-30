@@ -23,10 +23,10 @@ import * as fs from 'fs';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         synchronize: true,
-        // ssl: {
-        //   rejectUnauthorized: true,
-        //   ca: fs.readFileSync('src/ca.pem').toString(),
-        // },
+        ssl: {
+          rejectUnauthorized: true,
+          ca: fs.readFileSync('src/ca.pem').toString(),
+        },
         entities: [__dirname + '/**/*.entity{.js, .ts}'],
       }),
     }),

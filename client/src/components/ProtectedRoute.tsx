@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useAuth } from "@hooks/useAuth";
+import { useAuth } from "@hooks/auth/useAuth.ts";
 import err from "@assets/err.png";
 
 interface Props {

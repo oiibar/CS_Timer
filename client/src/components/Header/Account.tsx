@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { useAuth } from "@hooks/useAuth.ts";
+import { useAuth } from "@hooks/auth/useAuth.ts";
 import { useAppDispatch } from "@store/hooks.ts";
 import { logout } from "@store/user/userSlice.ts";
 import { removeToken } from "@helpers/localstorage.helper.ts";

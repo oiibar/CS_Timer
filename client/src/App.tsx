@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "@router/router";
-import { useAuthInit } from "@hooks/useAuthInit";
+import { useAuthInit } from "@hooks/auth/useAuthInit.ts";
 
 const App = () => {
   const { loading } = useAuthInit();

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import SessionsTable from "@components/SessionsTable/SessionsTable";
 import MainTimer from "@components/Timer/MainTimer";
-import { useSessions } from "@hooks/useSessions";
+import { useSessions } from "@hooks/sessions/useSessions.ts";
 
 const Sessions: FC = () => {
     const { sessions, addSession, deleteSession, updateSession } = useSessions();

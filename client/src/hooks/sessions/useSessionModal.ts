@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { Session } from "@interfaces/sessions";
+import { Session } from "@interfaces/sessions.ts";
 import { toast } from "react-toastify";
 
 interface UseSessionModalProps {

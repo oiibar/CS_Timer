@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@store/hooks.ts";
 import { selectScramble, setScramble, setSelectedType } from "@store/scramble/scramble.slice.ts";
-import scrambleGenerators from "@services/ScrambleGenerators.ts";
+import scrambleGenerators from "@services/scramble/ScrambleGenerators.ts";
 
 const Scrumble: FC = () => {
     const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ const Scrumble: FC = () => {
 
 
     return (
-        <div className="flex gap-4">
+        <div className="flex gap-4 px-52">
             <select
                 value={selectedType}
                 onChange={handleChange}

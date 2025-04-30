@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
-import { Session } from "@interfaces/sessions";
-import { instance } from "@api/axios.api";
-import { useAsync } from "@hooks/useAsync";
+import { Session } from "@interfaces/sessions.ts";
+import { instance } from "@api/axios.api.ts";
+import { useAsync } from "@hooks/useAsync.ts";
 
 export const useSessions = () => {
     const [sessions, setSessions] = useState<Session[]>([]);
