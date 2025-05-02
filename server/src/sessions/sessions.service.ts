@@ -20,6 +20,7 @@ export class SessionsService {
     const newSession = {
       scramble: createSessionsDto.scramble,
       time: createSessionsDto.time,
+      discipline: createSessionsDto.discipline,
       extraTwo: createSessionsDto.extraTwo,
       DNF: createSessionsDto.DNF,
       user: { id },
@@ -28,16 +29,23 @@ export class SessionsService {
     return await this.sessionsRepository.save(newSession);
   }
 
-  async findAll(id: number) {
+  async findAll(userId: number, discipline?: string) {
+    const where: any = {
+      user: { id: userId },
+    };
+
+    if (discipline) {
+      where.discipline = discipline;
+    }
+
     return await this.sessionsRepository.find({
-      where: {
-        user: { id },
-      },
+      where,
       order: {
         created_at: 'DESC',
       },
     });
   }
+
 
   async findOne(id: number) {
     const session = await this.sessionsRepository.findOne({

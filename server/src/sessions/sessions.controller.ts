@@ -9,7 +9,7 @@ import {
   UseGuards,
   UsePipes,
   ValidationPipe,
-  Req,
+  Req, Query,
 } from '@nestjs/common';
 import { SessionsService } from './sessions.service';
 import { CreateSessionsDto } from './dto/create-sessions.dto';
@@ -22,10 +22,9 @@ export class SessionsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll(@Req() req) {
-    return this.sessionsService.findAll(+req.user.id);
-  }
-
+  findAll(@Req() req, @Query('discipline') discipline?: string) {
+    return this.sessionsService.findAll(+req.user.id, discipline);
+  }z
   @Post()
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe())

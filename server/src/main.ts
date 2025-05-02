@@ -8,8 +8,10 @@ async function bootstrap() {
     origin: 'https://cs-timer-six.vercel.app',
     credentials: true,
   });
+  // app.enableCors();
   await app.listen(10000, '0.0.0.0');
 }
 bootstrap();
 
+// https://cs-timer-six.vercel.app
 // "start:dev": "kill-port.cmd && nest start --watch",

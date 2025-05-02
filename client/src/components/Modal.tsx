@@ -28,6 +28,7 @@ const Modal: FC<SessionModalProps> = ({ session, isOpen, onClose, onSave }) => {
           </div>
 
           <p className="text-sm text-slate-300">{session.scramble}</p>
+          <p className="text-sm text-slate-300">{session.discipline}</p>
           <p className="text-xs text-slate-400 mb-4">
             {new Date(session.created_at).toLocaleString()}
           </p>

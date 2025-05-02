@@ -25,6 +25,10 @@ export class Sessions {
   @Column({ default: false })
   DNF: boolean;
 
+  // new column
+  @Column({ default: "3x3x3" })
+  discipline: string;
+
   @ManyToOne(() => User, (user) => user.sessions, { eager: true })
   user: User;
 

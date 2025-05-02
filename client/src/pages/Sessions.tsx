@@ -4,7 +4,7 @@ import MainTimer from "@components/Timer/MainTimer";
 import { useSessions } from "@hooks/sessions/useSessions.ts";
 
 const Sessions: FC = () => {
-    const { sessions, addSession, deleteSession, updateSession } = useSessions();
+    const { sessions, addSession, deleteSession, updateSession, fetchSessions } = useSessions();
 
     return (
         <div className="flex">
@@ -12,6 +12,7 @@ const Sessions: FC = () => {
                 sessions={sessions}
                 onDelete={deleteSession}
                 onUpdate={updateSession}
+                onDisciplineChange={fetchSessions}
             />
             <main className="flex justify-center items-center mx-auto">
                 <MainTimer sessions={sessions} onAdd={addSession} />

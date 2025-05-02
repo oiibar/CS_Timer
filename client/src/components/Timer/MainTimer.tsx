@@ -103,6 +103,7 @@ const MainTimer: React.FC<Props> = ({ sessions, onAdd }) => {
 
     const handleSubmitSession = async (elapsed: number) => {
         const scrambleToSubmit = selectedScramble?.scramble || "";
+        const discipline = selectedScramble?.type || "";
 
         const currentBest = sessions.length > 0
             ? Math.min(...sessions.map(s => s.time))
@@ -112,6 +113,7 @@ const MainTimer: React.FC<Props> = ({ sessions, onAdd }) => {
             time: elapsed,
             scramble: scrambleToSubmit,
             extraTwo: false,
+            discipline: discipline,
             DNF: false,
             updated_at: ""
         });

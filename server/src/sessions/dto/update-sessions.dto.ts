@@ -9,6 +9,8 @@ export class UpdateSessionDto {
   @IsNotEmpty()
   extraTwo: boolean;
   @IsNotEmpty()
+  discipline: string;
+  @IsNotEmpty()
   DNF: boolean;
   @IsOptional()
   user?: User;

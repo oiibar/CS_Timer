@@ -16,6 +16,5 @@ instance.interceptors.request.use((config) => {
 });
 
 // https://cstimer-production.up.railway.app/api
-
-// https://cs-timer-serv.onrender.com
 // http://localhost:10000/api
+// https://cs-timer-serv.onrender.com

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { Session } from "@interfaces/sessions.ts";
 import { instance } from "@api/axios.api.ts";
 import { useAsync } from "@hooks/useAsync.ts";
@@ -7,10 +7,16 @@ export const useSessions = () => {
     const [sessions, setSessions] = useState<Session[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const rawFetchSessions = useCallback(async () => {
-        const { data } = await instance.get<Session[]>("/sessions");
-        setSessions(data);
-    }, []);
+    const rawFetchSessions = useCallback(
+        async (discipline?: string) => {
+            const { data } = await instance.get<Session[]>("/sessions", {
+                params: discipline ? { discipline } : {},
+            });
+            setSessions(data);
+        },
+        []
+    );
+
 
     const fetchSessions = useAsync(rawFetchSessions);
 
@@ -39,7 +45,7 @@ export const useSessions = () => {
         (async () => {
             setLoading(true);
             try {
-                await fetchSessions();
+                await fetchSessions('3x3x3');
             } finally {
                 setLoading(false);
             }
